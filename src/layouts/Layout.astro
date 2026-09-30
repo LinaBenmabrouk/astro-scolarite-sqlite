@@ -1,6 +1,12 @@
 ---
 import "../styles/global.css";
-const { title="Scolarité" } = Astro.props;
+const { title="Lycée", nav=true } = Astro.props;
 ---
 <html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><title>{title} — Université</title></head>
-<body><nav><div class="container"><strong>Scolarité</strong><a href="/">Accueil</a><a href="/students">Étudiants</a><a href="/teachers">Enseignants</a><a href="/formations">Formations</a><a href="/courses">Cours</a><a href="/registrations">Inscriptions</a></div></nav><main class="container"><slot /></main></body></html>
+<body>{nav && <nav><div class="container"><strong>scolarité</strong><a href="/">Accueil</a><a href="/students">Étudiants</a><a href="/formations">Formations</a><a href="/courses">Cours</a><a href="/registrations">Inscriptions</a><a href="/teachers">Enseignants</a><button id="logout" class="logout" type="button">Déconnexion</button></div></nav>}<main class="container"><slot /></main>
+<script>
+  import { signOut } from 'auth-astro/client';
+
+  document.querySelector('#logout')?.addEventListener('click', () => signOut());
+</script>
+</body></html>
